@@ -6,16 +6,13 @@ on:
       - master
       - dev
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
       - run: npm install
       - run: npm run tsc
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
       - uses: actions/checkout@v2
 # taken from https://stackoverflow.com/a/64210623/4188138
       - name: Get branch name (merge)
@@ -26,9 +23,6 @@ jobs:
         if: github.event_name == 'pull_request'
         shell: bash
         run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
-      - name: debug
-        shell: bash
-        run: echo "${{ secrets.DEPLOY_KEY }}"
       - name: rsync deployments
         uses: burnett01/rsync-deployments@4.1
         with:
