@@ -1,0 +1,9 @@
+Project setup:
+https://pankaj-kumar.medium.com/getting-started-using-typescript-with-node-js-and-express-6aff573667d5
+
+Start script:
+https://stackoverflow.com/a/57998821/4188138
+
+Auth:
+    Use passport js?
+    sample of passport and multi auth https://gist.github.com/joshbirk/1732068

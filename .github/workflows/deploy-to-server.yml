@@ -1,0 +1,38 @@
+name: deploy-to-server
+on:
+  push:
+    branches:
+      - main
+      - master
+      - dev
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: npm install
+      - run: npm run tsc
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+# taken from https://stackoverflow.com/a/64210623/4188138
+      - name: Get branch name (merge)
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
+      - name: Get branch name (pull request)
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@4.1
+        with:
+          switches: -avzr --delete --exclude='.git/' --exclude='.github/' --exclude="*.db"
+          path: dist/
+          remote_path: /home/ec2-user/${{ env.BRANCH_NAME }}
+          remote_host: ec2-user@ec2-3-10-151-65.eu-west-2.compute.amazonaws.com
+          remote_port: 22
+          remote_user: ec2-user
+          remote_key: ${{ secrets.DEPLOY_KEY }}
