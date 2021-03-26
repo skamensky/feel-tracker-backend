@@ -35,15 +35,15 @@ jobs:
           remote_port: 22
           remote_user: ec2-user
           remote_key: ${{ secrets.DEPLOY_KEY }}
-    restart-server:
-      name: Restart Server
-      runs-on: ubuntu-latest
-      steps:
-        - name: run-restart-script
-          uses: appleboy/ssh-action@master
-          with:
-            host: ec2-3-10-151-65.eu-west-2.compute.amazonaws.com
-            username: ec2-user
-            key: ${{ secrets.DEPLOY_KEY }}
-            port: 22
-            script: whoami
+  restart-server:
+    name: Restart Server
+    runs-on: ubuntu-latest
+    steps:
+      - name: run-restart-script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ec2-3-10-151-65.eu-west-2.compute.amazonaws.com
+          username: ec2-user
+          key: ${{ secrets.DEPLOY_KEY }}
+          port: 22
+          script: /usr/bin/bash /home/ec2-user/${{ env.BRANCH_NAME }}/server/restart_server.sh
