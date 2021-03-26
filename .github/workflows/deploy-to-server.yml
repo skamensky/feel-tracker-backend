@@ -37,6 +37,7 @@ jobs:
           remote_key: ${{ secrets.DEPLOY_KEY }}
   restart-server:
     name: Restart Server
+    needs: build-and-deploy
     runs-on: ubuntu-latest
     steps:
       - name: run-restart-script
