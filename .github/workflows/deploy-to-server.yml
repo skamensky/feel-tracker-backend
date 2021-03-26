@@ -30,7 +30,7 @@ jobs:
         uses: burnett01/rsync-deployments@4.1
         with:
           switches: -avzr --delete --files-from='rsync_list.txt' --exclude="*.db"
-          path: dist
+          path: .
           remote_path: /home/ec2-user/${{ env.BRANCH_NAME }}
           remote_host: ec2-3-10-151-65.eu-west-2.compute.amazonaws.com
           remote_port: 22
