@@ -13,7 +13,6 @@ jobs:
       - uses: actions/setup-node@v1
       - run: npm install
       - run: npm run tsc
-      - uses: actions/checkout@v2
 # taken from https://stackoverflow.com/a/64210623/4188138
       - name: Get branch name (merge)
         if: github.event_name != 'pull_request'
@@ -27,7 +26,7 @@ jobs:
         uses: burnett01/rsync-deployments@4.1
         with:
           switches: -avzr --delete --exclude='.git/' --exclude='.github/' --exclude="*.db"
-          path: dist/
+          path: .
           remote_path: /home/ec2-user/${{ env.BRANCH_NAME }}
           remote_host: ec2-3-10-151-65.eu-west-2.compute.amazonaws.com
           remote_port: 22
