@@ -26,13 +26,16 @@ jobs:
         if: github.event_name == 'pull_request'
         shell: bash
         run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
+      - name: debug
+        shell: bash
+        run: echo "${{ secrets.DEPLOY_KEY }}"
       - name: rsync deployments
         uses: burnett01/rsync-deployments@4.1
         with:
           switches: -avzr --delete --exclude='.git/' --exclude='.github/' --exclude="*.db"
           path: dist/
           remote_path: /home/ec2-user/${{ env.BRANCH_NAME }}
-          remote_host: ec2-user@ec2-3-10-151-65.eu-west-2.compute.amazonaws.com
+          remote_host: ec2-3-10-151-65.eu-west-2.compute.amazonaws.com
           remote_port: 22
           remote_user: ec2-user
           remote_key: ${{ secrets.DEPLOY_KEY }}
