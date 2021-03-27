@@ -12,4 +12,4 @@ cd ..
 docker rm $(docker stop $(docker ps -a -q --filter ancestor=$IMAGE_NAME --format="{{.ID}}")) || true
 
 docker build -t $IMAGE_NAME  -f server/Dockerfile .
-docker run -p 80:8080 -v "$(dirname $(pwd))/persistent_data":/persistent_data -d $IMAGE_NAME
+docker run -p 80:8080 -v "$(pwd)/persistent_data":/persistent_data -d $IMAGE_NAME
