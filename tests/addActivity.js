@@ -1,6 +1,9 @@
 const fetch = require("node-fetch");
 const assert = require('assert');
 
+base_url = process.env.REMOTE_TEST ? 'http://3.10.151.65': 'http://localhost:80'
+
+
 const activity = {
   user_id: 1,
     title: "Testing the API",
@@ -10,7 +13,7 @@ const activity = {
 }
 
 const body = JSON.stringify(activity);
-fetch("http://localhost:80/activity", {
+fetch(`${base_url}/activity`, {
   method: "POST",
   body,
   headers: { "Content-Type": "application/json" },

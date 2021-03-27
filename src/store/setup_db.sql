@@ -16,7 +16,7 @@ CREATE TABLE activity(
     user_id INTEGER,
     title TEXT,
     description TEXT,
-    feeling TEXT
+    feeling TEXT,
     time INTEGER,
     FOREIGN KEY(user_id) REFERENCES user(user_id)
 );
