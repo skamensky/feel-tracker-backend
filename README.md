@@ -1,6 +1,24 @@
+## Running Locally 
+
 Server requires docker installed
 
-From the root of the directory run `sudo server/restart_server.sh` to run the server
+- From the root of the directory run `npm run run_posix` to run the server on a POSIX system
+
+- On windows run `npm run run_windows`
+
+# Tests
+To run the tests for the remote server, ensure the environment variable `REMOTE_TEST` is present (the value does not matter).
+To run the tests locally, make sure `REMOTE_TEST` is *not* set.
+
+As of now, tests are run one by one. In the future a more automated system will be put in place.
+
+### Run the tests
+1. `cd tests`
+1.  `node addActivity.js`
+1.  `node fetchActivities.js`
+
+
+
 
 
 # Rest API
