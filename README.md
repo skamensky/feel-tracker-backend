@@ -45,7 +45,8 @@ Returns data like so
         feeling: 'Good',
         time: 1,
         tags: ['health','education','leisure'],
-        user_id: 1
+        user_id: 1,
+        id: 1
       },
       {
         title: 'Two',
@@ -53,7 +54,8 @@ Returns data like so
         feeling: 'Great',
         time: 2,
         tags: [],
-        user_id: 2
+        user_id: 1,
+        id: 2
       },
       {
         title: 'Three',
@@ -61,7 +63,8 @@ Returns data like so
         feeling: 'Bad',
         time: 3,
         tags: [],
-        user_id: 3
+        user_id: 1,
+        id: 3
       }
     ]
   }
