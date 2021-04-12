@@ -22,7 +22,7 @@ jobs:
         run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
       - name: list files for rsync
         shell: bash
-        run: find src server -type f >> rsync_list.txt && echo "package.json" >> rsync_list.txt && echo ".dockerignore" >> rsync_list.txt
+        run: find src server -type f >> rsync_list.txt && echo "package.json" >> rsync_list.txt && echo ".dockerignore" >> rsync_list.txt && echo "tsconfig.json" >> rsync_list.txt
       - name: rsync deployments
         uses: burnett01/rsync-deployments@4.1
         with:
