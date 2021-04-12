@@ -45,7 +45,7 @@ function arrayToSQLValuesString(values: number[] | string[]): string {
 }
 
 async function getActivities(
-  user_id: String,
+  user_id: Number,
   start_time: Number,
   end_time: Number
 ): Promise<Activity[]> {
@@ -88,6 +88,7 @@ async function getActivities(
       row.feeling,
       row.time,
       row.tags,
+      user_id,
       row.activity_id
     );
   });

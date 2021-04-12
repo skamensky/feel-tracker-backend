@@ -50,7 +50,7 @@ app.get("/activities", async function (req, res) {
   }
   try {
     const activities = await getActivities(
-      req.query.user_id,
+      Number(req.query.user_id),
       req.query.start_time,
       req.query.end_time
     );

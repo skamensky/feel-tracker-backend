@@ -2,9 +2,9 @@
 
 Server requires docker installed
 
-- From the root of the directory run `npm run run_posix` to run the server on a POSIX system
+- From the root of the directory run `npm run build_run_posix` to run the server on a POSIX system
 
-- On windows run `npm run run_windows`
+- On windows run `npm run build_run_windows`
 
 # Tests
 To run the tests for the remote server, ensure the environment variable `REMOTE_TEST` is present (the value does not matter).

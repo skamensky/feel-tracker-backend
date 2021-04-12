@@ -28,3 +28,10 @@ CREATE TABLE activity_tag_junction(
     FOREIGN KEY(tag_id) REFERENCES tag(tag_id),
     FOREIGN KEY(activity_id) REFERENCES activity(activity_id)
 );
+
+insert into user (
+    first_name,
+    last_name,
+    email,
+    google_id
+) VALUES ('shmuel','kamensky','example@example.com','123');
