@@ -6,15 +6,13 @@ on:
       - master
       - dev
 jobs:
-  build-and-deploy:
+  deploy:
     name: Build and Deploy to Server
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - run: npm install
-      - run: npm run build
-# taken from https://stackoverflow.com/a/64210623/4188138
+        # taken from https://stackoverflow.com/a/64210623/4188138
       - name: Get branch name (merge)
         if: github.event_name != 'pull_request'
         shell: bash
@@ -25,7 +23,7 @@ jobs:
         run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
       - name: list files for rsync
         shell: bash
-        run: find dist server -type f >> rsync_list.txt && echo "package.json" >> rsync_list.txt
+        run: find src server -type f >> rsync_list.txt && echo "package.json" && echo ".dockerignore" >> rsync_list.txt
       - name: rsync deployments
         uses: burnett01/rsync-deployments@4.1
         with:
@@ -38,7 +36,7 @@ jobs:
           remote_key: ${{ secrets.DEPLOY_KEY }}
   restart-server:
     name: Restart Server
-    needs: build-and-deploy
+    needs: deploy
     runs-on: ubuntu-latest
     steps:
       - name: Get branch name (merge)

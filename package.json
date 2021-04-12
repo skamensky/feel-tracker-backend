@@ -3,12 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && cp src/store/setup_db.sql dist/store/",
-    "build_dev": "npm run build && sudo bash ./server/restart_server.sh && docker logs $(docker ps -a -q --filter ancestor=feel_tracker_server --format=\"{{.ID}}\") --follow",
-    "server": "node server.js",
-    "restart": "npm run tsc && (kill $(lsof -ti:3000) || true) && npm run server",
-    "start": "tsc-watch --project . --onSuccess \"nodemon ./dist/server.js\""
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "run_windows": "call server\\restart_server.bat",
+      "run_posix": "sudo bash ./server/restart_server.sh && docker logs $(docker ps -a -q --filter ancestor=feel_tracker_server --format=\"{{.ID}}\") --follow",
   },
   "author": "",
   "license": "ISC",
